@@ -1,39 +1,17 @@
 package com.drondon.lifecycle;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.View;
-import android.widget.Button;
 
-public class MainActivity extends Activity {
+public class DetailActivity extends Activity {
 
-    private static final String TAG = "MainActivity_";
+    private static final String TAG = "DetailActivity_";
 
-
-    /*
-    *
-    *    MainActivity thisActivity = this;
-    *    same
-    *    Context thisContext = thisActivity;
-    * */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        Button button = findViewById(R.id.button);
-
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getBaseContext(), DetailActivity.class);
-                startActivity(intent);
-            }
-        });
-
+        setContentView(R.layout.activity_detail);
         Log.d(TAG, "onCreate: " + this);
     }
 
@@ -53,12 +31,6 @@ public class MainActivity extends Activity {
     protected void onRestart() {
         super.onRestart();
         Log.d(TAG, "onRestart: ");
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        Log.d(TAG, "onCreateOptionsMenu: ");
-        return super.onCreateOptionsMenu(menu);
     }
 
     // Доступно пользователю
