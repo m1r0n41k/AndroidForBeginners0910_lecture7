@@ -1,6 +1,7 @@
 package com.drondon.lifecycle;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -8,10 +9,15 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class DetailActivity extends Activity {
 
     private static final String TAG = "DetailActivity_";
+
+    public static final String MY_REQUEST_KEY = "com.drondon.lifecycle.request.screen.name";
+
+    boolean launchFromMainActivity = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +25,16 @@ public class DetailActivity extends Activity {
         setContentView(R.layout.activity_detail);
         Log.d(TAG, "onCreate: " + this);
 
+        //Получение данных с вызывающего активити
+        Intent intent = getIntent();
+        String requestScreen = intent.getStringExtra("MY_REQUEST_KEY");
+        Toast.makeText(this, "Request from: " + requestScreen, Toast.LENGTH_SHORT).show();
+
+        if ("MainActivity".equals(requestScreen)) {
+            launchFromMainActivity = true;
+        }
+
+        // Инициализируем View
         final EditText etName = findViewById(R.id.et_name);
         etName.addTextChangedListener(new TextWatcher() {
             @Override

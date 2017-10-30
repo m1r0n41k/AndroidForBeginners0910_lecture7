@@ -29,7 +29,7 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getBaseContext(), DetailActivity.class);
-                intent.putExtra("MY_REQUEST_KEY", "Ping");
+                intent.putExtra("MY_REQUEST_KEY", "MainActivity");
                 startActivity(intent);
             }
         });
