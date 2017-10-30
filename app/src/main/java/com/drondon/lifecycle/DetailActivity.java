@@ -2,7 +2,12 @@ package com.drondon.lifecycle;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 
 public class DetailActivity extends Activity {
 
@@ -13,6 +18,41 @@ public class DetailActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
         Log.d(TAG, "onCreate: " + this);
+
+        final EditText etName = findViewById(R.id.et_name);
+        etName.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                Log.d(TAG, "beforeTextChanged() called with: s = [" + s + "], start = [" + start + "], count = [" + count + "], after = [" + after + "]");
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                Log.d(TAG, "onTextChanged() called with: s = [" + s + "], start = [" + start + "], before = [" + before + "], count = [" + count + "]");
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                Log.d(TAG, "afterTextChanged() called with: s = [" + s + "]");
+                String name = s.toString();
+                if (name.length() > 9) {
+                    etName.setError("ERROR!!!! Слишком длинное");
+                } else {
+                    etName.setError(null);
+                }
+            }
+        });
+
+        Button btnSave = findViewById(R.id.button_save);
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String name = etName.getText().toString();
+
+            }
+        });
+
+
     }
 
     @Override

@@ -12,7 +12,6 @@ public class MainActivity extends Activity {
 
     private static final String TAG = "MainActivity_";
 
-
     /*
     *
     *    MainActivity thisActivity = this;
@@ -30,6 +29,7 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getBaseContext(), DetailActivity.class);
+                intent.putExtra("MY_REQUEST_KEY", "Ping");
                 startActivity(intent);
             }
         });
