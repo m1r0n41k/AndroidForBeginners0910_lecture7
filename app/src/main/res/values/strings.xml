@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">LifeCycle</string>
+    <string name="app_toast_request_screen_message">Запущено с: %s</string>
+
+
+    <string name="app_button_name">Save</string>
+
 </resources>

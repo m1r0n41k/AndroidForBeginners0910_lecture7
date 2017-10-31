@@ -2,6 +2,7 @@ package com.drondon.lifecycle;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -28,7 +29,11 @@ public class DetailActivity extends Activity {
         //Получение данных с вызывающего активити
         Intent intent = getIntent();
         String requestScreen = intent.getStringExtra("MY_REQUEST_KEY");
-        Toast.makeText(this, "Request from: " + requestScreen, Toast.LENGTH_SHORT).show();
+        if (requestScreen != null) {
+            String formattedString = getString(R.string.app_toast_request_screen_message, requestScreen);
+            String appName = /*context.*/getString(R.string.app_name);
+            Toast.makeText(this, formattedString, Toast.LENGTH_LONG).show();
+        }
 
         if ("MainActivity".equals(requestScreen)) {
             launchFromMainActivity = true;
@@ -64,7 +69,7 @@ public class DetailActivity extends Activity {
             @Override
             public void onClick(View v) {
                 String name = etName.getText().toString();
-
+                v.setBackgroundColor(getColor(R.color.my_color));
             }
         });
 
