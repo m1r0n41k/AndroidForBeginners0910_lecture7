@@ -30,11 +30,19 @@ public class MainActivity extends Activity {
             public void onClick(View v) {
                 Intent intent = new Intent(getBaseContext(), DetailActivity.class);
                 intent.putExtra("MY_REQUEST_KEY", "MainActivity");
-                startActivity(intent);
+                startActivityForResult(intent, DetailActivity.REQUEST_CODE);
             }
         });
 
         Log.d(TAG, "onCreate: " + this);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Log.d(TAG, "onActivityResult() called with: requestCode = ["
+                + requestCode
+                + "], resultCode = [" + resultCode + "], data = [" + data.getStringExtra(DetailActivity.MY_EXTRA_KEY_NAME) + "]");
     }
 
     @Override

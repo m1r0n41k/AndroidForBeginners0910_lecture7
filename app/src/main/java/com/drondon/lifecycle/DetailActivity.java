@@ -2,7 +2,6 @@ package com.drondon.lifecycle;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -17,6 +16,9 @@ public class DetailActivity extends Activity {
     private static final String TAG = "DetailActivity_";
 
     public static final String MY_REQUEST_KEY = "com.drondon.lifecycle.request.screen.name";
+
+    public static final int REQUEST_CODE = 1234;
+    public static final String MY_EXTRA_KEY_NAME = "com.drondon.lifecycle.result.name";
 
     boolean launchFromMainActivity = false;
 
@@ -41,6 +43,8 @@ public class DetailActivity extends Activity {
 
         // Инициализируем View
         final EditText etName = findViewById(R.id.et_name);
+        final Button btnSave = findViewById(R.id.button_save);
+
         etName.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -58,22 +62,29 @@ public class DetailActivity extends Activity {
                 String name = s.toString();
                 if (name.length() > 9) {
                     etName.setError("ERROR!!!! Слишком длинное");
+                    btnSave.setVisibility(View.GONE);
                 } else {
                     etName.setError(null);
+                    btnSave.setVisibility(View.VISIBLE);
                 }
             }
         });
 
-        Button btnSave = findViewById(R.id.button_save);
+
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String name = etName.getText().toString();
-                v.setBackgroundColor(getColor(R.color.my_color));
+
+                //Помещаем данные на отправку
+                Intent resultIntent = new Intent();
+                resultIntent.putExtra(MY_EXTRA_KEY_NAME, name);
+                setResult(Activity.RESULT_OK, resultIntent);
+
+                //Завершает работу DetailActivity
+                finish();
             }
         });
-
-
     }
 
     @Override
